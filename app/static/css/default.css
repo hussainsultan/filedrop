@@ -1,0 +1,14 @@
+body {
+    padding: 20px;
+}
+
+.droptarget {
+    padding: 50px 0px;
+    width: 400px;
+    border: 5px dashed #ccc;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    color: #888;
+}

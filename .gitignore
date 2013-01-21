@@ -1,0 +1,11 @@
+*~
+*.pyc
+.vagrant
+.venv
+.DS_Store
+npm-debug.log
+app/static/assets
+app/static/public
+build/
+node_modules/
+components/

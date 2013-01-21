@@ -1,0 +1,60 @@
+#
+#  Default configuration file for ferm(1).
+#
+
+@def $TOBIAS_OFFICE = (178.255.65.104 188.220.56.177);
+
+table filter {
+    chain INPUT {
+        policy DROP;
+
+        # connection tracking
+        mod state state INVALID DROP;
+        mod state state (ESTABLISHED RELATED) ACCEPT;
+
+        # allow local packet
+        interface lo ACCEPT;
+
+        # respond to ping
+        proto icmp ACCEPT;
+
+        # allow from tobias office
+        proto tcp dport (http https ssh) source $TOBIAS_OFFICE ACCEPT;
+
+        # allow git receive hook to talk to buildbot
+        proto tcp dport 9999 source $TOBIAS_OFFICE ACCEPT;
+<% if public_ports != '' -%>
+
+        # Added by Puppet
+<% public_ports.each do |val| -%>
+        proto tcp dport <%= val %> ACCEPT;
+<% end -%>
+<% end -%>
+
+    }
+    chain OUTPUT {
+        policy ACCEPT;
+
+        # connection tracking
+        #mod state state INVALID DROP;
+        mod state state (ESTABLISHED RELATED) ACCEPT;
+    }
+    chain FORWARD {
+        policy DROP;
+
+        # connection tracking
+        mod state state INVALID DROP;
+        mod state state (ESTABLISHED RELATED) ACCEPT;
+    }
+}
+
+# IPv6:
+#domain ip6 {
+#    table filter {
+#        chain INPUT {
+#            policy ACCEPT;
+#            # ...
+#        }
+#        # ...
+#    }
+#}
