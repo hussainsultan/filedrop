@@ -26,8 +26,8 @@ def deploy(warn=True):
         local('git pull origin %(branch)s' % env)
 
         # Initialise remote git repo
-        run('GIT_SSH=fabfile/deployment/ssh git init %(remote_path)s' % env)
-        run('git config receive.denyCurrentBranch ignore')
+        run('git init %(remote_path)s' % env)
+        run('git --git-dir=%(remote_path)s/.git config receive.denyCurrentBranch ignore' % env)
         local('cat %s/deployment/hooks/post-receive.tpl | sed \'s/\$\$BRANCH\$\$/%s/g\' > /tmp/post-receive.tmp' % (os.path.dirname(__file__), env.branch))
         put('/tmp/post-receive.tmp', '%(remote_path)s/.git/hooks/post-receive' % env)
         run('chmod +x %(remote_path)s/.git/hooks/post-receive' % env)

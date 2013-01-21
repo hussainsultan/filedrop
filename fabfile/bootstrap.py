@@ -15,7 +15,7 @@ def software():
         # Install prerequisites
         print(cyan('\nInstalling software...'))
         do('apt-get -qq update')
-        do('apt-get install puppet git')
+        do('apt-get -qq install -y puppet git')
 
 
 def user():
