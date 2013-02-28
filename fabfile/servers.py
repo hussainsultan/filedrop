@@ -3,8 +3,17 @@ fabfile module that provides a helper for other modules to programmatically
 execute a task on the remote server (as specified by the git branch/server
 configuration mapping).
 """
-from fabric.api import env
+import os
+import json
+from fabric.api import env, task
 from fabric.utils import abort
+
+# Read server config from JSON file.
+fp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'servers.json')
+try:
+    env.servers = json.load(open(fp, 'r'))
+except:
+    env.servers = {}
 
 
 def remote():
@@ -21,3 +30,10 @@ def remote():
         if branch not in env.servers:
             abort('Branch does not correspond to server and no host specified.')
         return env.servers[branch]
+
+
+def save():
+    """
+    Write server config to JSON file.
+    """
+    json.dump(env.servers, open(fp, 'w'), indent=4)

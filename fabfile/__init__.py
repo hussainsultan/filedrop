@@ -12,7 +12,7 @@ import bootstrap as _bootstrap
 import db
 import deployment as code
 import puppet
-import server
+import servers
 import virtualenv
 
 
@@ -70,7 +70,7 @@ def test():
     app.test()
 
 
-#@task
+@task
 def deploy():
     """
     Deploy to remote environment.
@@ -84,7 +84,7 @@ def deploy():
     """
     code.deploy()
     # Post-deploy tasks on the remote server
-    with settings(host_string=server.remote()):
+    with settings(host_string=servers.remote()):
         build()
         puppet.run()
         app.restart()

@@ -8,9 +8,6 @@ from fabfile.git import branch
 env.branch = branch()
 env.remote_path = '/srv/www/app'
 
-env.servers = {
-}
-
 # Check to see if -u was specified at the command line
 for opt in sys.argv:
     if opt.startswith('-u') or opt.startswith('--user'):
