@@ -1,6 +1,6 @@
 *~
 *.pyc
-.vagrant
+.vagrant*
 .venv
 .DS_Store
 npm-debug.log

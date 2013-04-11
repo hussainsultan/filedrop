@@ -12,3 +12,8 @@ body {
     font-size: large;
     color: #888;
 }
+
+.progressarea .error {
+    display: none;
+    color: red;
+}

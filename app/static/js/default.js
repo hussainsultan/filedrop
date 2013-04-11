@@ -2,23 +2,28 @@ var r = new Resumable({
     target: '/upload'
 });
 
-r.assignBrowse($('button.browse'));
+r.assignBrowse($('.browse'));
 r.assignDrop($('.droptarget'));
 
 r.on('fileAdded', function(file){
-    $('div.upload').hide();
+    $('.upload').hide();
 
     // Add file
     var $file = $('<p>' + file.fileName + ' (' + file.size +' bytes)</p>');
-    $('div#progress').prepend($file);
+    $('.progressarea').prepend($file);
 
-    $('div#progress').show();
+    $('.progressarea').show();
 
     // Begin upload
-    //r.upload();
+    r.upload();
 });
 
 r.on('progress', function() {
-    $('div#progress progress').attr('value', r.progress()*100);
-    $('#progress .percentage').html(r.progress()*100 + '%');
+    $('progress').attr('value', r.progress()*100);
+    $('.progressarea .percentage').html(r.progress()*100 + '%');
+});
+
+r.on('fileError', function(file, message) {
+    $('.progressarea .error').show();
+    $('progress').hide();
 });

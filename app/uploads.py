@@ -2,11 +2,15 @@ from flask.ext.uploads import configure_uploads
 from flask.ext.uploads import UploadSet, ALL, patch_request_class
 
 
+partial = UploadSet('partial', ALL)
 files = UploadSet('files', ALL)
+tmp = UploadSet('tmp', ALL)
 
 # List of upload sets to be initialised with the app
 upload_sets = [
+    partial,
     files,
+    tmp,
 ]
 
 

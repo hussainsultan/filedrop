@@ -64,8 +64,8 @@ def build():
     """
     Build static assets.
     """
-    from app.extensions.assets import configure_assets
-    environment = configure_assets(current_app)
+    from app.assets import init
+    environment = init(current_app)
     environment.build_all()
 
 if __name__ == "__main__":

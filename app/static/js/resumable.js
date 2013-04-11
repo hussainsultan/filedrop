@@ -100,6 +100,14 @@ var Resumable = function(opts){
     }
   }
 
+  var onDrop = function(e){
+    $h.stopEvent(e);
+    appendFilesFromFileList(e.dataTransfer.files);
+  };
+  var onDragOver = function(e) {
+    e.preventDefault();
+  };
+
   // INTERNAL METHODS (both handy and responsible for the heavy load)
   var appendFilesFromFileList = function(fileList){
     // check for uploading too many files
@@ -262,6 +270,7 @@ var Resumable = function(opts){
       // Add extra data to identify chunk
       params.push(['resumableChunkNumber', encodeURIComponent($.offset+1)].join('='));
       params.push(['resumableChunkSize', encodeURIComponent($.resumableObj.opts.chunkSize)].join('='));
+      params.push(['resumableCurrentChunkSize', encodeURIComponent($.endByte - $.startByte)].join('='));
       params.push(['resumableTotalSize', encodeURIComponent($.fileObjSize)].join('='));
       params.push(['resumableIdentifier', encodeURIComponent($.fileObj.uniqueIdentifier)].join('='));
       params.push(['resumableFilename', encodeURIComponent($.fileObj.fileName)].join('='));
@@ -320,6 +329,7 @@ var Resumable = function(opts){
       // Add extra data to identify chunk
       formData.append('resumableChunkNumber', $.offset+1);
       formData.append('resumableChunkSize', $.resumableObj.opts.chunkSize);
+      formData.append('resumableCurrentChunkSize', $.endByte - $.startByte);
       formData.append('resumableTotalSize', $.fileObjSize);
       formData.append('resumableIdentifier', $.fileObj.uniqueIdentifier);
       formData.append('resumableFilename', $.fileObj.fileName);
@@ -482,11 +492,16 @@ var Resumable = function(opts){
     if(typeof(domNodes.length)=='undefined') domNodes = [domNodes];
 
     $h.each(domNodes, function(domNode) {
-        domNode.addEventListener('dragover', function(e){e.preventDefault();}, false);
-        domNode.addEventListener('drop', function(e){
-            $h.stopEvent(e);
-            appendFilesFromFileList(e.dataTransfer.files);
-          }, false);
+        domNode.addEventListener('dragover', onDragOver, false);
+        domNode.addEventListener('drop', onDrop, false);
+      });
+  };
+  $.unAssignDrop = function(domNodes) {
+    if (typeof(domNodes.length) == 'undefined') domNodes = [domNodes];
+
+    $h.each(domNodes, function(domNode) {
+        domNode.removeEventListener('dragover', onDragOver);
+        domNode.removeEventListener('drop', onDrop);
       });
   };
   $.isUploading = function(){
