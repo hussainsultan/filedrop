@@ -33,6 +33,11 @@ server {
         add_header cache-control public;
     }
 
+    location /repository {
+        internal;
+        alias /srv/www/app/app/data/repository;
+    }
+
     location / {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
