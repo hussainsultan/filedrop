@@ -25,6 +25,14 @@ server {
     auth_basic_user_file htpasswd-<%= name %>;
     <%- end -%>
 
+    location /static {
+        alias /srv/www/app/app/static;
+
+        expires max;
+        add_header Pragma cache;
+        add_header cache-control public;
+    }
+
     location / {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;

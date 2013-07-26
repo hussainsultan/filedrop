@@ -1,5 +1,6 @@
 *~
 *.pyc
+.codeintel/
 .vagrant*
 .venv
 .DS_Store

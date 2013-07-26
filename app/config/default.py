@@ -18,7 +18,9 @@ ERROR_EMAIL = None
 SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://@/app'
 
 # Default/base uploads destination
-UPLOADS_DEFAULT_DEST = 'app/uploads'
+UPLOADS_DEFAULT_DEST = 'app/data'
 
-# URL to uploads (include trailing slash)
-UPLOADS_DEFAULT_URL = '/files/'
+# Better file handling for downloads
+USE_X_SENDFILE = True
+
+APP_SLUG_STORAGE_DIR = 'app/data/slugs'

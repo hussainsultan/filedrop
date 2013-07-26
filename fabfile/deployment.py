@@ -7,7 +7,7 @@ from fabric.utils import abort
 from fabric.colors import cyan, yellow
 from fabric.contrib.console import confirm
 from fabric.context_managers import settings, hide
-from fabfile.server import remote
+from fabfile.servers import remote
 
 
 def deploy(warn=True):

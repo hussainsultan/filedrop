@@ -2,7 +2,6 @@ import os
 from flask import Flask
 
 import assets
-import db
 import jinja
 import logging
 import toolbar
@@ -23,7 +22,6 @@ def create_app(config=None):
         app.config.from_envvar('FLASK_CONFIG')
 
     logging.init(app)
-    db.init(app)
     jinja.init(app)
     toolbar.init(app)
     uploads.init(app)

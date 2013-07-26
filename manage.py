@@ -50,8 +50,7 @@ def _make_shell_context():
     """
     Shell context: import helper objects here.
     """
-    from app.extensions.db import db
-    return dict(app=current_app, db=db)
+    return dict(app=current_app)
 
 
 manager.add_option('--flask-config', dest='config', help='Specify Flask config file', required=False)
