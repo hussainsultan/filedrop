@@ -1,7 +1,7 @@
 import socket
 
 # no debugging by default - this is overriden in runserver for local dev
-DEBUG = ASSETS_DEBUG = DEBUG_TB_ENABLED = False
+DEBUG = False
 
 # override with something sensible
 SECRET_KEY = 'SecretKeyForSessionSigning'
@@ -23,4 +23,5 @@ UPLOADS_DEFAULT_DEST = 'app/data'
 # Better file handling for downloads
 USE_X_SENDFILE = True
 
+# Storage dir for slug symlinks
 APP_SLUG_STORAGE_DIR = 'app/data/slugs'

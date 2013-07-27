@@ -64,6 +64,9 @@ def upload_post():
         # Link slug to file
         slug.link(filepath)
 
+        # Delete partially uploaded files
+        r.delete_chunks()
+
         # DONE MATE!
         return Response('file is complete', status=200)
 

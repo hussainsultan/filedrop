@@ -5,7 +5,6 @@ from flask import Flask, request_finished
 import assets
 import jinja
 import logging
-import toolbar
 import uploads
 import views
 
@@ -24,11 +23,8 @@ def create_app(config=None):
 
     logging.init(app)
     jinja.init(app)
-    toolbar.init(app)
     uploads.init(app)
     assets.init(app)
-
-    app.register_blueprint(views.main)
 
     # Add request hook to change x-sendfile to x-accel-redirect (for nginx)
     @request_finished.connect_via(app)
@@ -38,5 +34,7 @@ def create_app(config=None):
                                      abspath(app.config['UPLOADS_DEFAULT_DEST']))
             response.headers['X-Accel-Redirect'] = filepath
             del response.headers['X-Sendfile']
+
+    app.register_blueprint(views.main)
 
     return app
