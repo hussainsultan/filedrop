@@ -16,7 +16,12 @@ def upload_resume():
     """Called when resumable.js is checking for the presence of already-
     uploaded chunks.
     """
-    r = PartialUpload(UPLOAD_SETS['partial'], request.args)
+    slug_id = request.args.get('slug', None)
+    if slug_id is None:
+        return Response('no slug id provided', status=500)
+
+    r = PartialUpload(UPLOAD_SETS['partial'], kwargs=request.args,
+                      folder=slug_id)
     if r.chunk_exists():
         return Response('chunk exists', status=200)
     else:
