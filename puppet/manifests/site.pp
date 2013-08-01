@@ -9,14 +9,12 @@ node default {
   include cssmin
   include fabric
   include git
-  include less
   include nginx
   include nodejs
   include postfix
   include puppet::sudoers
   include python
   include pil
-  include sass
   include sudo
   include uglifyjs
   include users

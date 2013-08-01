@@ -3,10 +3,6 @@
 #
 node filedrop inherits default {
 
-  include vagrant
-  include vagrant::pip
-  include vagrant::puppet
-
   # Nginx
   nginx::vhost { 'gunicorn':
     ensure => present,
@@ -19,6 +15,6 @@ node filedrop inherits default {
     env  => [['FLASK_CONFIG' => 'config/production.py']],
     # Gunicorn service in Vagrant can't start on init becuase /vagrant isn't
     # get mounted until boot is finished. Puppet will start it instead.
-    startup  => false,
+    startup  => true,
   }
 }
