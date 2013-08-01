@@ -9,7 +9,6 @@ import config
 # Fabfile modules
 import app
 import bootstrap as _bootstrap
-import db
 import deployment as code
 import puppet
 import servers
@@ -53,7 +52,6 @@ def build():
     """
     virtualenv.build()
     app.build()
-    db.build()
 
 
 @task
