@@ -5,7 +5,7 @@ from flask import Flask, request_finished, render_template
 import assets
 import api
 import jinja
-import logging
+import logger
 import uploads
 import views
 
@@ -22,7 +22,7 @@ def create_app(config=None):
     elif os.getenv('FLASK_CONFIG'):
         app.config.from_envvar('FLASK_CONFIG')
 
-    logging.init(app)
+    logger.init(app)
     jinja.init(app)
     uploads.init(app)
     assets.init(app)
