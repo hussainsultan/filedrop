@@ -12,9 +12,7 @@ node default {
   include less
   include nginx
   include nodejs
-  include nunjucks
   include postfix
-  include postgresql
   include puppet::sudoers
   include python
   include pil
@@ -22,16 +20,6 @@ node default {
   include sudo
   include uglifyjs
   include users
-
-  # Create postgresql user for the app
-  postgresql::role { 'www-data':
-    ensure => present,
-  }
-  postgresql::role { 'tobias':
-    ensure     => present,
-    createdb   => true,        # This user creates the
-    grant      => 'www-data',  # app database.
-  }
 }
 
 #

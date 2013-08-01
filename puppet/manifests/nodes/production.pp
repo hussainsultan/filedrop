@@ -1,7 +1,7 @@
 #
 # Standalone manifest - for dev Vagrant box.
 #
-node precise64 inherits default {
+node filedrop inherits default {
 
   include vagrant
   include vagrant::pip
