@@ -1,10 +1,7 @@
-body {
-    padding: 20px;
-}
 
 .droptarget {
-    padding: 50px 0px;
-    width: 400px;
+    padding: 100px 0px;
+    margin: 20px;
     border: 5px dashed #ccc;
     border-radius: 20px;
     text-align: center;
@@ -13,7 +10,39 @@ body {
     color: #888;
 }
 
-.progressarea .error {
-    display: none;
+.droptarget.hover {
+    background-color: #D1E9F5;
+}
+
+.progress {
+    width: 80%;
+    float: left;
+    margin-right: 10px;
+}
+
+.url input {
+    border: none;
+    background: inherit;
+    color: #15c;
+    text-align: center;
+    width: 100%;
+}
+
+#invite-generated .alert {
+    width: 75%;
+    margin: auto;
+}
+
+.error {
     color: red;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+.light {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
 }

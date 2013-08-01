@@ -25,3 +25,7 @@ USE_X_SENDFILE = True
 
 # Storage dir for slug symlinks
 APP_SLUG_STORAGE_DIR = 'app/data/slugs'
+
+# Restrict access to file upload by IP address
+UPLOADS_ALLOW_NETS = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16']
+#UPLOADS_ALLOW_NETS = []

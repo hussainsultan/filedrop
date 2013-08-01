@@ -1,8 +1,9 @@
 import os
 from os.path import abspath, relpath
-from flask import Flask, request_finished
+from flask import Flask, request_finished, render_template
 
 import assets
+import api
 import jinja
 import logging
 import uploads
@@ -35,6 +36,19 @@ def create_app(config=None):
             response.headers['X-Accel-Redirect'] = filepath
             del response.headers['X-Sendfile']
 
-    app.register_blueprint(views.main)
+    app.register_blueprint(views.blueprint)
+    app.register_blueprint(api.blueprint)
+
+    @app.errorhandler(404)
+    def not_found(error):
+        return render_template('errors/404.html'), 404
+
+    @app.errorhandler(403)
+    def forbidden(error):
+        return render_template('errors/403.html'), 403
+
+    @app.errorhandler(500)
+    def server_error(error):
+        return render_template('errors/default.html'), 500
 
     return app

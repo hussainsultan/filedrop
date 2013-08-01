@@ -4,6 +4,7 @@
 node precise64 inherits default {
 
   include vagrant
+  include vagrant::pip
   include vagrant::postgresql
   include vagrant::puppet
 

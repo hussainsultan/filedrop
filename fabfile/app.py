@@ -1,8 +1,6 @@
 """
 fabfile module containing application-specific tasks.
 """
-import os
-import json
 from fabric.api import task
 from fabric.colors import cyan
 from fabfile.utils import do
@@ -14,16 +12,11 @@ def build():
     """
     Run application build tasks.
     """
-    # Ensure all base files exist
-    do('mkdir -p app/static/assets/tmp')
-    do('touch app/static/assets/tmp/mustache-compiled-templates.min.js')
-
     # Generate static assets. Note that we always build assets with the
     # production config because dev will never point to compiled files.
     print(cyan('\nBuilding static assets...'))
     do('mkdir -p app/static/assets/css')
     do('mkdir -p app/static/assets/js')
-    do('export FLASK_CONFIG=config/production.py && %s/bin/python manage.py mustache_compile' % venv_path)
     do('export FLASK_CONFIG=config/production.py && %s/bin/python manage.py build' % venv_path)
 
 

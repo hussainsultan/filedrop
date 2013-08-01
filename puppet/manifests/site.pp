@@ -9,10 +9,10 @@ node default {
   include cssmin
   include fabric
   include git
-  include hoganjs
   include less
   include nginx
   include nodejs
+  include nunjucks
   include postfix
   include postgresql
   include puppet::sudoers
