@@ -31,19 +31,5 @@ def build():
     environment.build_all()
 
 
-@manager.command
-def compile_templates():
-    """
-    Compile JS templates.
-    """
-    static_folder = join(abspath(dirname(__file__)), 'app', 'static')
-    template_output_file = join(static_folder, 'assets', 'tmp', 'templates.js')
-    template_dir = join(static_folder, 'js', 'app', 'templates')
-    # Truncate file and open for writing
-    with open(template_output_file, 'w') as output_file:
-        # Build 'em templates
-        subprocess.call(['nunjucks-precompile', template_dir], stdout=output_file)
-
-
 if __name__ == '__main__':
     manager.run()
