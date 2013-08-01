@@ -1,6 +1,6 @@
 Fabric==1.5.2
 Flask==0.9
-git+git://github.com/tobiasandtobias/flask-assetslite.git@0.9.2#egg=Flask_AssetsLiteFlask-DebugToolbar==0.7.1
+git+git://github.com/tobiasandtobias/flask-assetslite.git@0.9.2#egg=Flask_AssetsLite
 Flask-SQLAlchemy==0.16
 Flask-Script==0.5.3
 Flask-Uploads==0.1.3
