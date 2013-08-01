@@ -1,5 +1,5 @@
 from glob import glob
-from os import unlink
+from os import unlink, rmdir
 from os.path import isfile, getsize, join
 from werkzeug.utils import secure_filename
 
@@ -110,6 +110,10 @@ class PartialUpload(object):
     def delete_chunks(self):
         """Delete all chunks."""
         [unlink(chunk) for chunk in self.chunks]
+        try:
+            rmdir(self._chunk_filepath(''))
+        except OSError:
+            pass
 
     def process_chunk(self, file):
         """Save data at this chunk location."""
