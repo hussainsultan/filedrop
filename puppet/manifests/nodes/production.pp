@@ -4,11 +4,11 @@
 node filedrop inherits default {
 
   # Nginx
-  nginx::vhost { 'gunicorn':
-    ensure => present,
-    app    => '127.0.0.1:8000',
-    auth   => false,
-  }
+  #nginx::vhost { 'gunicorn':
+  #  ensure => present,
+  #  app    => '127.0.0.1:8000',
+  #  auth   => false,
+  #}
 
   upstart::job { 'gunicorn':
     ensure   => present,
