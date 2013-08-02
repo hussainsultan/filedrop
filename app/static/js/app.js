@@ -38,7 +38,9 @@ var UploadWidget = {
     /**
      * UploadWidget init(): called on the upload page.
      */
-    init: function() {
+    init: function(slug) {
+
+        this.slug = slug;
 
         _.bindAll(this, 'prepareFileUpload', 'handleFileUpload', 'updateProgress', 'uploadError', 'uploadSuccess', 'uploadStopped');
 
@@ -83,13 +85,13 @@ var UploadWidget = {
         var callback = this.handleFileUpload;
 
         // Check if a global slug ID is present
-        if (typeof(slug) !== 'undefined') {
-            callback(file, slug);
+        if (typeof(this.slug) !== 'undefined') {
+            callback(file, this.slug);
         } else {
             // Request a valid slug ID when a file is dropped
             $.get('/api/request-slug', function(data) {
-                slug = data.response.id;
-                callback(file, slug);
+                this.slug = data.response.id;
+                callback(file, this.slug);
             });
         }
     },

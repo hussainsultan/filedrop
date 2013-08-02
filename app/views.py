@@ -32,7 +32,7 @@ def invite_upload(slug_id=None):
         if (not slug.exists()) or (slug.has_file()):
             return abort(404)
 
-    return render_template('upload.html')
+    return render_template('upload.html', slug=slug)
 
 
 @blueprint.route('/file/<string:slug_id>')
