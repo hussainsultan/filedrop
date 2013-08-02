@@ -1,4 +1,5 @@
 import logging
+from logging.handlers import SMTPHandler
 
 
 def init(app):
@@ -16,12 +17,14 @@ def init(app):
     Function:           %(funcName)s
     Time:               %(asctime)s
 
-    %(message)s
+%(message)s
 
     ''')
 
             # Send errors via email
-            mail_handler = logging.handlers.SMTPHandler('127.0.0.1', app.config.get('DEFAULT_MAIL_SENDER'), app.config.get('ERROR_EMAIL'), 'Error')
+            mail_handler = SMTPHandler('127.0.0.1',
+                                       app.config.get('DEFAULT_MAIL_SENDER'),
+                                       app.config.get('ERROR_EMAIL'), 'Error')
             mail_handler.setLevel(logging.ERROR)
             mail_handler.setFormatter(log_format)
 
