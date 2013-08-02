@@ -207,8 +207,6 @@ var InviteWidget = {
     setLink: function(el, slug) {
         $el = $(el);
 
-        console.log($el);
-
         // Generate an A tag and set the href relatively. We can use this to
         // get the FULL URL by reading .href from the browser.
         var link = $('<a/>').attr('href', '/invite/' + slug);
