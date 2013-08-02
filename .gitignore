@@ -1,12 +1,13 @@
 *~
 *.pyc
+.cache/
 .codeintel/
 .vagrant*
 .venv
 .DS_Store
 npm-debug.log
-app/static/assets
-app/static/public
+app/data/
+app/static/assets/
 build/
 node_modules/
 components/
