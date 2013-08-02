@@ -22,7 +22,7 @@
 
 .url input {
     border: none;
-    background: inherit;
+    background-color: transparent;
     color: #15c;
     text-align: center;
     width: 100%;
@@ -45,4 +45,8 @@
 .light {
   opacity: 0.65;
   filter: alpha(opacity=65);
+}
+
+input[type="file"] {
+    display: none;
 }

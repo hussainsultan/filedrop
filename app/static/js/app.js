@@ -44,10 +44,20 @@ var UploadWidget = {
 
         _.bindAll(this, 'prepareFileUpload', 'handleFileUpload', 'updateProgress', 'uploadError', 'uploadSuccess', 'uploadStopped');
 
+        // Customise tooltip depending on whether this is a PC or Mac.
+        if (Util.isMacintosh()) {
+            $('.url input').attr('title', 'Press ⌘-C to copy');
+        }
+
         // Resumable has builtin init functions for easy set up of file
         // browsing and drop targets
         this.r.assignBrowse($('.browse'));
         this.r.assignDrop($('.droptarget'));
+
+        $('.browse').on('click', function() {
+            $('input[type="file"]').get(0).click();
+            e.preventDefault();
+        });
 
         // Supplement the drop target with our own handlers that change the
         // background colour on hover
@@ -67,9 +77,15 @@ var UploadWidget = {
         this.r.on('fileSuccess', this.uploadStopped);
         this.r.on('fileError', this.uploadStopped);
 
-        // Set up handler on URL field to select all text when it's clicked on
-        $('.url input').on('mouseup', function() {
+        $('.url input').on('focus', function(e) {
+            $(this).tooltip('show');
+        });
+        $('.url input').on('blur', function(e) {
+            $(this).tooltip('hide');
+        });
+        $('.url input').on('mouseup', function(e) {
             this.select();
+            e.preventDefault();
         });
     },
 
@@ -150,12 +166,8 @@ var UploadWidget = {
 
         this.showTab('#success');
 
-        // Customise tooltip depending on whether this is a PC or Mac.
-        if (Util.isMacintosh) {
-            $('.url input').attr('title', 'Press ⌘-C to copy');
-        }
-        $('.url input').tooltip('show');
         $('.url input').select();
+        $('.url input').focus();
     },
 
     /**
@@ -186,9 +198,20 @@ var InviteWidget = {
         _.bindAll(this, 'createInvite');
         $('.invite-button').on('click', this.createInvite);
 
-        // Set up handler on URL field to select all text when it's clicked on
-        $('.url input').on('mouseup', function() {
+        // Customise tooltip depending on whether this is a PC or Mac.
+        if (Util.isMacintosh()) {
+            $('.url input').attr('title', 'Press ⌘-C to copy');
+        }
+
+        $('.url input').on('focus', function(e) {
+            $(this).tooltip('show');
+        });
+        $('.url input').on('blur', function(e) {
+            $(this).tooltip('hide');
+        });
+        $('.url input').on('mouseup', function(e) {
             this.select();
+            e.preventDefault();
         });
     },
 
@@ -212,11 +235,7 @@ var InviteWidget = {
         var link = $('<a/>').attr('href', '/invite/' + slug);
         $el.val(link.get(0).href);
 
-        // Customise tooltip depending on whether this is a PC or Mac.
-        if (Util.isMacintosh) {
-            $el.attr('title', 'Press ⌘-C to copy');
-        }
-        $el.tooltip('show');
         $el.select();
+        $el.focus();
     }
 };
