@@ -1,6 +1,6 @@
 from flask import request
 
-from .auth import is_allowed_net
+from .auth import is_authenticated
 
 
 def init(app):
@@ -24,4 +24,4 @@ def init(app):
         Whether or not this request is coming from an allowed IP network
         (and hence able to upload files).
         """
-        return dict(authenticated=is_allowed_net(request.remote_addr))
+        return dict(authenticated=is_authenticated(request))

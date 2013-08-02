@@ -27,5 +27,7 @@ USE_X_SENDFILE = True
 APP_SLUG_STORAGE_DIR = 'app/data/slugs'
 
 # Restrict access to file upload by IP address
-UPLOADS_ALLOW_NETS = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16']
-#UPLOADS_ALLOW_NETS = []
+UPLOADS_ALLOW_NETS = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', '127.0.0.1']
+
+# Custom auth function
+UPLOADS_CUSTOM_AUTH = None
