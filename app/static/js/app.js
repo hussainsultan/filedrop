@@ -67,6 +67,9 @@ var UploadWidget = {
         $('.droptarget').on('dragleave', function() {
             $(this).removeClass('hover');
         });
+        $('.droptarget').on('click', function() {
+            $('input[type="file"]').get(0).click();
+        });
 
         // Set up event handlers
         this.r.on('fileAdded', this.prepareFileUpload);
